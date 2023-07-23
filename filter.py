@@ -6,7 +6,8 @@ dir_list2 = os.listdir('filtered_episodes4')
 numbers2 = [file.split('_')[0] for file in dir_list2]
 
 # 등장 횟수가 5인 숫자만 필터링하고, 중복을 제거한 뒤 name 리스트에 저장
-name = list(set([number for number in numbers if number not in numbers2]))
+numbers_v2 = list(set([number for number in numbers if numbers.count(number) == 5]))
+name = list(set([number for number in numbers_v2 if number not in numbers2]))
 
 from tqdm import tqdm
 
@@ -21,7 +22,7 @@ idx, idx1 = 0, 0
 num = len(name)
 num_lst = list(range(0, num+1, num//5))
 
-for i in tqdm(range(num_lst[0], num_lst[1])):
+for i in tqdm(range(num_lst[1], num_lst[2])):
     obs = [read_dataset(f"episodes4/{name[i]}_obs0.npz"), read_dataset(f"episodes4/{name[i]}_obs1.npz")]
     act = [read_dataset(f"episodes4/{name[i]}_action0.npz"), read_dataset(f"episodes4/{name[i]}_action1.npz")]
 
